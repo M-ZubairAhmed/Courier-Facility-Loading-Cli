@@ -120,7 +120,7 @@ described below the command:
 `Slot number 5 is free`
 ##### 9
 ###### Input:
-`status`
+`show_rack`
 ###### Output:
 | Slot No 	| Registration No 	| Weight 	|
 |---------	|-----------------	|--------	|
