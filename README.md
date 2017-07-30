@@ -17,14 +17,23 @@ To new rack shelf in the facility
 ##### Store goods
 To store good items in the rack shelf
 <br>
-`park XX YY`
+`park X Y`
 <br>
-*XX : Positive integers, denoting parcel code
+*X : Positive integer, denoting parcel code
 <br>
-YY : Positive integers, denoting parcel weight*
+Y : Positive integer, denoting parcel weight*
 ##### Dispatch goods
 To dispatch good items from the rack shelf and prepare for delivery.
 <br>
 `leave X for delivery`
 <br>
 *X : Positive integer, denoting rack slot number*
+##### Search in rack
+###### With weights
+`slot_numbers_for_parcels_with_weight X`
+<br>
+*X : Positive integer, denoting parcel weight*
+###### With parcel code
+`slot_number_for_registration_number Y`
+<br>
+*Y : Positive integers, denoting parcel code*
