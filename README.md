@@ -2,6 +2,7 @@
 # Courier Facility Loading
 A command line java program to keep track of goods loading and unloading in storage racks
 
+## 
 
 ## Requirements
 Program should provide with an interactive command prompt based shell where commands can be typed in.
@@ -37,3 +38,6 @@ To dispatch good items from the rack shelf and prepare for delivery.
 `slot_number_for_registration_number Y`
 <br>
 *Y : Positive integers, denoting parcel code*
+##### Display Rack
+Shows the racks content in a table
+`status`
