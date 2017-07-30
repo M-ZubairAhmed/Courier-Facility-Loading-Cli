@@ -43,13 +43,13 @@ to find out:
 ##### Create Rack shelf
 To new rack shelf in the facility
 <br> 
-`create_parcel_slot_lot X`
+`create_rack X`
 <br>
 *X : Positive integer denoting rack size*
 ##### Store goods
 To store good items in the rack shelf
 <br>
-`park X Y`
+`store X Y`
 <br>
 *X : Positive integer, denoting parcel code
 <br>
@@ -57,7 +57,7 @@ Y : Positive integer, denoting parcel weight*
 ##### Dispatch goods
 To dispatch good items from the rack shelf and prepare for delivery.
 <br>
-`leave X for delivery`
+`dispatch X`
 <br>
 *X : Positive integer, denoting rack slot number*
 ##### Search in rack
@@ -71,7 +71,7 @@ To dispatch good items from the rack shelf and prepare for delivery.
 *Y : Positive integers, denoting parcel code*
 ##### Display Rack
 Shows the racks content in a table
-`status`
+`show_rack`
 
 ### Example Run
 Assuming a parcel slot with 6 slots, the following commands should be run
@@ -79,43 +79,43 @@ in sequence by typing them in at a prompt and should produce output as
 described below the command:
 ##### 1 
 ###### Input:
-`create_parking_lot 6`
+`create_rack 6`
 ###### Output:
-`Created a parcel slot with 6 slots`
+`Created a Rack with 6 shelves`
 
 ##### 2 
 ###### Input:
-`park 1234 400`
+`store 1234 400`
 ###### Output:
 `Allocated slot number: 1`
 ##### 3 
 ###### Input:
-`park 9999 400`
+`store 9999 400`
 ###### Output:
 ` Allocated slot number: 6`
 ##### 4
 ###### Input:
-`park 0001 600`
+`store 0001 600`
 ###### Output:
 `Allocated slot number: 2`
 ##### 5
 ###### Input:
-`park 7777 100`
+`store 7777 100`
 ###### Output:
 `Allocated slot number: 5`
 ##### 6
 ###### Input:
-`park 2701 700`
+`store 2701 700`
 ###### Output:
 `Allocated slot number: 3`
 ##### 7
 ###### Input:
-`park 3141 600`
+`store 3141 600`
 ###### Output:
 `Allocated slot number: 4`
 ##### 8
 ###### Input:
-`leave 5 for delivery`
+`dispatch 5`
 ###### Output:
 `Slot number 5 is free`
 ##### 9
@@ -131,14 +131,14 @@ described below the command:
 | 4       	| 3141            	| 600    	|
 ##### 10
 ###### Input:
-`park 333 400`
+`store 333 400`
 ###### Output:
 `Allocated slot number: 5`
 ##### 11
 ###### Input:
-`park 9999 400`
+`store 9999 400`
 ###### Output:
-`Sorry,parcel slot is full`
+`Sorry,rack is full`
 ##### 12
 ###### Input:
 `parcel_code_for_parcels_with_weight 400`
@@ -158,4 +158,4 @@ described below the command:
  ###### Input:
 `slot_number_for_registration_number 1111`
 ###### Output:
-`Not found`
+`Not found in the rack`
