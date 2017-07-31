@@ -20,71 +20,83 @@ public class Main {
             userInput = scanned.split("\\s+");
             String command = userInput[0];
 
-            if (command.equals("create_shelf")) {
-                //Checking for even condition
-                if (Integer.valueOf(userInput[1]) % 2 != 0) {
-                    System.out.println("Each level in the shelf has minimum 2 racks,\n" +
-                            "therefore it has to be an even number");
-                } else {
-//                    if ()
-                    racks = Integer.valueOf(userInput[1]);
-                    System.out.println("Created a shelf with " + racks + " racks");
-                }
-
-            } else if (command.equals("store")) {
-                int productCode = Integer.valueOf(userInput[1]);
-                int productWeight = Integer.valueOf(userInput[2]);
-                Integer rack = -1;
-                int leftRackRow = 1;
-                int rightRackRow = racks;
-
-                for (int i = 0; i <= racks; i++) {
-                    if (i % 2 == 0) {
-                        if (shelf.get(leftRackRow) == null) {
-                            rack = leftRackRow;
-                            break;
-                        } else {
-                            leftRackRow++;
-                        }
+            switch (command) {
+                case ("create_shelf"): {
+                    //Checking for even condition
+                    if (Integer.valueOf(userInput[1]) % 2 != 0) {
+                        System.out.println("Each level in the shelf has minimum 2 racks,\n" +
+                                "therefore it has to be an even number");
                     } else {
-                        if (shelf.get(rightRackRow) == null) {
-                            rack = rightRackRow;
-                            break;
+//                    if ()
+                        racks = Integer.valueOf(userInput[1]);
+                        System.out.println("Created a shelf with " + racks + " racks");
+                    }
+
+                    break;
+                }
+                case ("store"): {
+                    int productCode = Integer.valueOf(userInput[1]);
+                    int productWeight = Integer.valueOf(userInput[2]);
+                    Integer rack = -1;
+                    int leftRackRow = 1;
+                    int rightRackRow = racks;
+
+                    for (int i = 0; i <= racks; i++) {
+                        if (i % 2 == 0) {
+                            if (shelf.get(leftRackRow) == null) {
+                                rack = leftRackRow;
+                                break;
+                            } else {
+                                leftRackRow++;
+                            }
                         } else {
-                            rightRackRow--;
+                            if (shelf.get(rightRackRow) == null) {
+                                rack = rightRackRow;
+                                break;
+                            } else {
+                                rightRackRow--;
+                            }
                         }
                     }
+
+                    if (rack == -1) {
+                        System.out.println("Sorry,rack is full");
+                    } else {
+                        shelf.put(rack, new slotDataType(productCode, productWeight));
+                        System.out.println("stored at rack No." + rack);
+                    }
+                    break;
                 }
-
-                if (rack == -1) {
-                    System.out.println("Sorry,rack is full");
-                } else {
-                    shelf.put(rack, new slotDataType(productCode, productWeight));
-                    System.out.println("Allocated to " + rack);
-                }
-            } else if (command.equals("dispatch")) {
-                int removingIndex = Integer.valueOf(userInput[1]);
-                shelf.remove(removingIndex);
-                System.out.println("Slot " + removingIndex + " is free");
-                System.out.print("\n");
-            } else if (command.equals("show_rack")) {
-                System.out.print("\n");
-                System.out.format("%s%20s%16s", "Slot No.", "Registration No.", "Weight");
-                System.out.print("\n");
-
-                for (Map.Entry<Integer, slotDataType> shelvesSlot : shelf.entrySet()) {
-                    int slotNum = shelvesSlot.getKey();
-                    int registrationNum = shelvesSlot.getValue().getCode();
-                    int weight = shelvesSlot.getValue().getWeight();
-
-                    System.out.format("%-12d%-26d%-50d", slotNum, registrationNum, weight);
+                case ("dispatch"): {
+                    int removingIndex = Integer.valueOf(userInput[1]);
+                    shelf.remove(removingIndex);
+                    System.out.println("Rack No." + removingIndex + " is emptied");
                     System.out.print("\n");
+                    break;
                 }
-            } else if (command.equals("exit")) {
-                System.out.println("exiting");
-                shouldLoop = false;
-            } else {
-                System.out.println("Error, Check your command!!");
+                case ("show_rack"): {
+                    System.out.print("\n");
+                    System.out.format("%s%20s%16s", "Rack No.", "Registration No.", "Weight");
+                    System.out.print("\n");
+
+                    for (Map.Entry<Integer, slotDataType> shelvesSlot : shelf.entrySet()) {
+                        int slotNum = shelvesSlot.getKey();
+                        int registrationNum = shelvesSlot.getValue().getCode();
+                        int weight = shelvesSlot.getValue().getWeight();
+
+                        System.out.format("%-12d%-26d%-50d", slotNum, registrationNum, weight);
+                        System.out.print("\n");
+                    }
+                    break;
+                }
+                case ("exit"): {
+                    System.out.println("exiting the app!");
+                    shouldLoop = false;
+                    break;
+                }
+                default: {
+                    System.out.println("Error, Check your command!!");
+                }
             }
 
         }
