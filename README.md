@@ -14,6 +14,8 @@ without any error.
 
 Eg: if I have a rake with 10 slots, the arrangement will be like:
 
+|||
+|---	|----	|
 | 5 	| 6  	|
 | 4 	| 7  	|
 | 3 	| 8  	|
