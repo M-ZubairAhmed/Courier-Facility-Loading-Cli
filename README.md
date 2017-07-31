@@ -14,8 +14,6 @@ without any error.
 
 Eg: if I have a rake with 10 slots, the arrangement will be like:
 
-|    	|   	|
-|---	|----	|
 | 5 	| 6  	|
 | 4 	| 7  	|
 | 3 	| 8  	|
@@ -42,7 +40,7 @@ to find out:
 
 ##### Create Rack shelf
 To new rack shelf in the facility
-<br> 
+<br>
 `create_rack X`
 <br>
 *X : Positive integer denoting rack size*
@@ -77,18 +75,18 @@ Shows the racks content in a table
 Assuming a parcel slot with 6 slots, the following commands should be run
 in sequence by typing them in at a prompt and should produce output as
 described below the command:
-##### 1 
+##### 1
 ###### Input:
 `create_rack 6`
 ###### Output:
 `Created a Rack with 6 shelves`
 
-##### 2 
+##### 2
 ###### Input:
 `store 1234 400`
 ###### Output:
 `Allocated slot number: 1`
-##### 3 
+##### 3
 ###### Input:
 `store 9999 400`
 ###### Output:
