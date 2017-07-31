@@ -20,7 +20,7 @@ public class Main {
             result = inputFromUser.split("\\s+");
             String command = result[0];
 
-            if (command.equals("create")) {
+            if (command.equals("create_rack")) {
                 slotSize = Integer.valueOf(result[1]);
                 //Checking for even condition
                 if (slotSize % 2 != 0) {
@@ -28,10 +28,10 @@ public class Main {
                             "therefore it has to be an even number");
                     slotSize = -1;
                 } else {
-                    System.out.println("Created a parcel slot with " + slotSize + " slots");
+                    System.out.println("Created a Rack with " + slotSize + " shelves");
                 }
 
-            } else if (command.equals("park")) {
+            } else if (command.equals("store")) {
                 int incomingCode = Integer.valueOf(result[1]);
                 int incomingWeight = Integer.valueOf(result[2]);
                 Integer parkingIndex = -1;
@@ -57,17 +57,17 @@ public class Main {
                 }
 
                 if (parkingIndex == -1) {
-                    System.out.println("Sorry,parcel slot is full");
+                    System.out.println("Sorry,rack is full");
                 } else {
                     slotDataMap.put(parkingIndex, new slotDataType(incomingCode, incomingWeight));
                     System.out.println("Allocated to " + parkingIndex);
                 }
-            } else if (command.equals("leave")) {
+            } else if (command.equals("dispatch")) {
                 int removingIndex = Integer.valueOf(result[1]);
                 slotDataMap.remove(removingIndex);
                 System.out.println("Slot " + removingIndex + " is free");
                 System.out.print("\n");
-            } else if (command.equals("status")) {
+            } else if (command.equals("show_rack")) {
                 System.out.print("\n");
                 System.out.format("%s%20s%16s", "Slot No.", "Registration No.", "Weight");
                 System.out.print("\n");
