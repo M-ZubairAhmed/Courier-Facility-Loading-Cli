@@ -22,16 +22,18 @@ public class Main {
 
             switch (command) {
                 case ("create_shelf"): {
-                    //Checking for even condition
                     if (Integer.valueOf(userInput[1]) % 2 != 0) {
                         System.out.println("Each level in the shelf has minimum 2 racks,\n" +
                                 "therefore it has to be an even number");
                     } else {
-//                    if ()
-                        racks = Integer.valueOf(userInput[1]);
-                        System.out.println("Created a shelf with " + racks + " racks");
+                        if (shelf.size() == 0) {
+                            racks = Integer.valueOf(userInput[1]);
+                            System.out.println("Created a shelf with " + racks + " racks");
+                        }
+                        else {
+                            System.out.println("Shelf of size " + racks + " already exists");
+                        }
                     }
-
                     break;
                 }
                 case ("store"): {
