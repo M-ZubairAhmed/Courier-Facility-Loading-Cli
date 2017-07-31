@@ -1,5 +1,8 @@
 package com.mastermindappz;
 
+import com.mastermindappz.Controller.NewShelf.NewSelf;
+import com.mastermindappz.Model.RackData;
+
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
@@ -7,14 +10,15 @@ import java.util.Scanner;
 public class Main {
 
     public static void main(String[] args) {
+        NewSelf newSelf = new NewSelf();
         Scanner scan = new Scanner(System.in);
         int racks = -1;
-        HashMap<Integer, slotDataType> shelf = new HashMap<Integer, slotDataType>();
+        HashMap<Integer, RackData> shelf = new HashMap<Integer, RackData>();
         String scanned;
         String[] userInput;
-        boolean shouldLoop = true;
+        boolean programRunning = true;
 
-        while (shouldLoop) {
+        while (programRunning) {
             System.out.println("\nEnter command :");
             scanned = scan.nextLine();
             userInput = scanned.split("\\s+");
@@ -22,17 +26,12 @@ public class Main {
 
             switch (command) {
                 case ("create_shelf"): {
-                    if (Integer.valueOf(userInput[1]) % 2 != 0) {
-                        System.out.println("Each level in the shelf has minimum 2 racks,\n" +
-                                "therefore it has to be an even number");
-                    } else {
-                        if (shelf.size() == 0) {
-                            racks = Integer.valueOf(userInput[1]);
-                            System.out.println("Created a shelf with " + racks + " racks");
-                        }
-                        else {
-                            System.out.println("Shelf of size " + racks + " already exists");
-                        }
+
+                    int userInputRackSize = Integer.valueOf(userInput[1]);
+                    int existingRackSize = shelf.size();
+
+                    if (newSelf.checking(userInputRackSize, existingRackSize)) {
+                        racks = userInputRackSize;
                     }
                     break;
                 }
@@ -64,15 +63,15 @@ public class Main {
                     if (rack == -1) {
                         System.out.println("Sorry,rack is full");
                     } else {
-                        shelf.put(rack, new slotDataType(productCode, productWeight));
+                        shelf.put(rack, new RackData(productCode, productWeight));
                         System.out.println("stored at rack No." + rack);
                     }
                     break;
                 }
                 case ("dispatch"): {
-                    int removingIndex = Integer.valueOf(userInput[1]);
-                    shelf.remove(removingIndex);
-                    System.out.println("Rack No." + removingIndex + " is emptied");
+                    int removeRack = Integer.valueOf(userInput[1]);
+                    shelf.remove(removeRack);
+                    System.out.println("Rack No." + removeRack + " is emptied");
                     System.out.print("\n");
                     break;
                 }
@@ -81,7 +80,7 @@ public class Main {
                     System.out.format("%s%20s%16s", "Rack No.", "Registration No.", "Weight");
                     System.out.print("\n");
 
-                    for (Map.Entry<Integer, slotDataType> shelvesSlot : shelf.entrySet()) {
+                    for (Map.Entry<Integer, RackData> shelvesSlot : shelf.entrySet()) {
                         int slotNum = shelvesSlot.getKey();
                         int registrationNum = shelvesSlot.getValue().getCode();
                         int weight = shelvesSlot.getValue().getWeight();
@@ -93,7 +92,7 @@ public class Main {
                 }
                 case ("exit"): {
                     System.out.println("exiting the app!");
-                    shouldLoop = false;
+                    programRunning = false;
                     break;
                 }
                 default: {

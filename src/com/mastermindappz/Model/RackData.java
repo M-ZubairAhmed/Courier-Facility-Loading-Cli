@@ -1,19 +1,19 @@
-package com.mastermindappz;
+package com.mastermindappz.Model;
 
-class slotDataType {
+public class RackData {
     private int code;
     private int weight;
 
-    slotDataType(int code, int weight) {
+    public RackData(int code, int weight) {
         this.code = code;
         this.weight = weight;
     }
 
-    int getCode() {
+    public int getCode() {
         return code;
     }
 
-    int getWeight() {
+    public int getWeight() {
         return weight;
     }
 
