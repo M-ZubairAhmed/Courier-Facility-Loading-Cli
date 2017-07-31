@@ -8,63 +8,63 @@ public class Main {
 
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
-        int slotSize = -1;
-        HashMap<Integer, slotDataType> slotDataMap = new HashMap<Integer, slotDataType>();
-        String inputFromUser;
-        String[] result;
+        int racks = -1;
+        HashMap<Integer, slotDataType> shelf = new HashMap<Integer, slotDataType>();
+        String scanned;
+        String[] userInput;
         boolean shouldLoop = true;
 
         while (shouldLoop) {
             System.out.println("\nEnter command :");
-            inputFromUser = scan.nextLine();
-            result = inputFromUser.split("\\s+");
-            String command = result[0];
+            scanned = scan.nextLine();
+            userInput = scanned.split("\\s+");
+            String command = userInput[0];
 
-            if (command.equals("create_rack")) {
-                slotSize = Integer.valueOf(result[1]);
+            if (command.equals("create_shelf")) {
                 //Checking for even condition
-                if (slotSize % 2 != 0) {
-                    System.out.println("Each level in the rack has minimum 2 slots,\n" +
+                if (Integer.valueOf(userInput[1]) % 2 != 0) {
+                    System.out.println("Each level in the shelf has minimum 2 racks,\n" +
                             "therefore it has to be an even number");
-                    slotSize = -1;
                 } else {
-                    System.out.println("Created a Rack with " + slotSize + " shelves");
+//                    if ()
+                    racks = Integer.valueOf(userInput[1]);
+                    System.out.println("Created a shelf with " + racks + " racks");
                 }
 
             } else if (command.equals("store")) {
-                int incomingCode = Integer.valueOf(result[1]);
-                int incomingWeight = Integer.valueOf(result[2]);
-                Integer parkingIndex = -1;
-                int leftRackNum = 1;
-                int rightRackNum = slotSize;
+                int productCode = Integer.valueOf(userInput[1]);
+                int productWeight = Integer.valueOf(userInput[2]);
+                Integer rack = -1;
+                int leftRackRow = 1;
+                int rightRackRow = racks;
 
-                for (int i = 0; i <= slotSize; i++) {
+                for (int i = 0; i <= racks; i++) {
                     if (i % 2 == 0) {
-                        if (slotDataMap.get(leftRackNum) == null) {
-                            parkingIndex = leftRackNum;
+                        if (shelf.get(leftRackRow) == null) {
+                            rack = leftRackRow;
                             break;
                         } else {
-                            leftRackNum++;
+                            leftRackRow++;
                         }
                     } else {
-                        if (slotDataMap.get(rightRackNum) == null) {
-                            parkingIndex = rightRackNum;
+                        if (shelf.get(rightRackRow) == null) {
+                            rack = rightRackRow;
                             break;
                         } else {
-                            rightRackNum--;
+                            rightRackRow--;
                         }
                     }
                 }
 
-                if (parkingIndex == -1) {
+                if (rack == -1) {
                     System.out.println("Sorry,rack is full");
                 } else {
-                    slotDataMap.put(parkingIndex, new slotDataType(incomingCode, incomingWeight));
-                    System.out.println("Allocated to " + parkingIndex);
+                    shelf.put(rack, new slotDataType(productCode, productWeight));
+                    System.out.println("Allocated to " + rack);
                 }
             } else if (command.equals("dispatch")) {
-                int removingIndex = Integer.valueOf(result[1]);
-                slotDataMap.remove(removingIndex);
+                int removingIndex = Integer.valueOf(userInput[1]);
+                shelf.remove(removingIndex);
                 System.out.println("Slot " + removingIndex + " is free");
                 System.out.print("\n");
             } else if (command.equals("show_rack")) {
@@ -72,10 +72,10 @@ public class Main {
                 System.out.format("%s%20s%16s", "Slot No.", "Registration No.", "Weight");
                 System.out.print("\n");
 
-                for (Map.Entry<Integer, slotDataType> map : slotDataMap.entrySet()) {
-                    int slotNum = map.getKey();
-                    int registrationNum = map.getValue().getCode();
-                    int weight = map.getValue().getWeight();
+                for (Map.Entry<Integer, slotDataType> shelvesSlot : shelf.entrySet()) {
+                    int slotNum = shelvesSlot.getKey();
+                    int registrationNum = shelvesSlot.getValue().getCode();
+                    int weight = shelvesSlot.getValue().getWeight();
 
                     System.out.format("%-12d%-26d%-50d", slotNum, registrationNum, weight);
                     System.out.print("\n");
