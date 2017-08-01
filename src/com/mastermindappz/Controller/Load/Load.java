@@ -25,5 +25,12 @@ public class Load {
         }
     }
 
+    public HashMap<Integer, RackData> outRack(HashMap<Integer, RackData> shelf, int rackNo) {
+        shelf.remove(rackNo);
+        System.out.println("Rack No." + rackNo + " is emptied");
+        System.out.print("\n");
+        return shelf;
+    }
+
 
 }

@@ -28,7 +28,6 @@ public class Main {
 
             switch (command) {
                 case ("create_shelf"): {
-
                     int userInputRackSize = Integer.valueOf(userInput[1]);
                     int existingRackSize = shelf.size();
 
@@ -45,10 +44,10 @@ public class Main {
                     break;
                 }
                 case ("dispatch"): {
-                    int removeRack = Integer.valueOf(userInput[1]);
-                    shelf.remove(removeRack);
-                    System.out.println("Rack No." + removeRack + " is emptied");
-                    System.out.print("\n");
+                    int rackNo = Integer.valueOf(userInput[1]);
+
+                    shelf = load.outRack(shelf,rackNo);
+
                     break;
                 }
                 case ("show_rack"): {
