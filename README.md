@@ -47,9 +47,9 @@ To new rack shelf in the facility
 <br>
 *X : Positive integer denoting rack size*
 ##### Store goods
-To store good items in the rack shelf
+To load good items in the rack shelf
 <br>
-`store X Y`
+`load X Y`
 <br>
 *X : Positive integer, denoting parcel code
 <br>
@@ -85,32 +85,32 @@ described below the command:
 
 ##### 2
 ###### Input:
-`store 1234 400`
+`load 1234 400`
 ###### Output:
 `Allocated slot number: 1`
 ##### 3
 ###### Input:
-`store 9999 400`
+`load 9999 400`
 ###### Output:
 ` Allocated slot number: 6`
 ##### 4
 ###### Input:
-`store 0001 600`
+`load 0001 600`
 ###### Output:
 `Allocated slot number: 2`
 ##### 5
 ###### Input:
-`store 7777 100`
+`load 7777 100`
 ###### Output:
 `Allocated slot number: 5`
 ##### 6
 ###### Input:
-`store 2701 700`
+`load 2701 700`
 ###### Output:
 `Allocated slot number: 3`
 ##### 7
 ###### Input:
-`store 3141 600`
+`load 3141 600`
 ###### Output:
 `Allocated slot number: 4`
 ##### 8
@@ -131,12 +131,12 @@ described below the command:
 | 4       	| 3141            	| 600    	|
 ##### 10
 ###### Input:
-`store 333 400`
+`load 333 400`
 ###### Output:
 `Allocated slot number: 5`
 ##### 11
 ###### Input:
-`store 9999 400`
+`load 9999 400`
 ###### Output:
 `Sorry,rack is full`
 ##### 12

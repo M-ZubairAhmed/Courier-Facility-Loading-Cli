@@ -1,6 +1,7 @@
 package com.mastermindappz;
 
 import com.mastermindappz.Controller.NewShelf.NewSelf;
+import com.mastermindappz.Controller.Load.Load;
 import com.mastermindappz.Model.RackData;
 
 import java.util.HashMap;
@@ -11,6 +12,7 @@ public class Main {
 
     public static void main(String[] args) {
         NewSelf newSelf = new NewSelf();
+        Load load = new Load();
         Scanner scan = new Scanner(System.in);
         int racks = -1;
         HashMap<Integer, RackData> shelf = new HashMap<Integer, RackData>();
@@ -30,42 +32,16 @@ public class Main {
                     int userInputRackSize = Integer.valueOf(userInput[1]);
                     int existingRackSize = shelf.size();
 
-                    if (newSelf.checking(userInputRackSize, existingRackSize)) {
-                        racks = userInputRackSize;
-                    }
+                    racks = newSelf.getVerifiedRacks(userInputRackSize, existingRackSize);
+
                     break;
                 }
-                case ("store"): {
+                case ("load"): {
                     int productCode = Integer.valueOf(userInput[1]);
                     int productWeight = Integer.valueOf(userInput[2]);
-                    Integer rack = -1;
-                    int leftRackRow = 1;
-                    int rightRackRow = racks;
 
-                    for (int i = 0; i <= racks; i++) {
-                        if (i % 2 == 0) {
-                            if (shelf.get(leftRackRow) == null) {
-                                rack = leftRackRow;
-                                break;
-                            } else {
-                                leftRackRow++;
-                            }
-                        } else {
-                            if (shelf.get(rightRackRow) == null) {
-                                rack = rightRackRow;
-                                break;
-                            } else {
-                                rightRackRow--;
-                            }
-                        }
-                    }
+                    shelf = load.intoRack(productCode, productWeight, shelf, racks);
 
-                    if (rack == -1) {
-                        System.out.println("Sorry,rack is full");
-                    } else {
-                        shelf.put(rack, new RackData(productCode, productWeight));
-                        System.out.println("stored at rack No." + rack);
-                    }
                     break;
                 }
                 case ("dispatch"): {
